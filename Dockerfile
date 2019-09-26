@@ -15,6 +15,9 @@ RUN go get github.com/BurntSushi/toml
 RUN go get github.com/go-chi/chi
 RUN go get github.com/go-chi/docgen
 RUN go get github.com/go-chi/render
+RUN go get github.com/anaskhan96/soup
+RUN cd /go/src/github.com/anaskhan96/soup && git checkout ad448eafe
+
 
 # Install and run du-discordbot
 RUN go install github.com/yamamushi/durouter

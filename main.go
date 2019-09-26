@@ -31,7 +31,7 @@ func init() {
 	}
 }
 
-func main () {
+func main() {
 
 	fmt.Println("\n\n|| Starting durouter ||")
 	log.SetOutput(ioutil.Discard)
@@ -55,6 +55,9 @@ func main () {
 
 	verifyAuth := controllers.NewVerifyAuth(globalconfig)
 	r.Get("/verifyauth/*", verifyAuth.Verify)
+	serverstatus := controllers.NewServerStatus(globalconfig)
+	r.Get("/serverstatus", serverstatus.GetStatus)
+	r.Get("/serverschedule", serverstatus.GetSchedule)
 
 	err = http.ListenAndServe(globalconfig.HostConfig.Host+":"+globalconfig.HostConfig.Port, r)
 	if err != nil {
@@ -70,4 +73,3 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 	message = "Hello " + message
 	_, _ = w.Write([]byte(message))
 }
-
